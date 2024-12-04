@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"os"
 	"sort"
 	"strconv"
 	"strings"
@@ -12,7 +11,7 @@ import (
 )
 
 func main() {
-	fi := utils.Must(os.Open(utils.DataFile()))
+	fi := utils.DataFile()
 	defer fi.Close()
 
 	approxLen := utils.Must(fi.Stat()).Size() / 5

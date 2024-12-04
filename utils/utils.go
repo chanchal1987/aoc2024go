@@ -1,6 +1,8 @@
 package utils
 
-import "os"
+import (
+	"os"
+)
 
 func Check(err error) {
 	if err != nil {
@@ -13,12 +15,12 @@ func Must[T any](v T, err error) T {
 	return v
 }
 
-func DataFile() string {
+func DataFile() *os.File {
 	if len(os.Args) < 2 {
 		panic("no file name provided")
 	}
 
-	return os.Args[1]
+	return Must(os.Open(os.Args[1]))
 }
 
 func AbsInt(n int) int {
