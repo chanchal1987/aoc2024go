@@ -14,10 +14,9 @@ func main() {
 	fi := utils.DataFile()
 	defer fi.Close()
 
-	approxLen := utils.Must(fi.Stat()).Size() / 5
+	approxLen := min(utils.Must(fi.Stat()).Size()/6, 1024)
 	left := make([]int, 0, approxLen)
 	right := make([]int, 0, approxLen)
-	l := 0
 
 	for scanner := bufio.NewScanner(fi); scanner.Scan(); {
 		ids := strings.Fields(scanner.Text())
@@ -27,9 +26,9 @@ func main() {
 
 		left = append(left, utils.Must(strconv.Atoi(ids[0])))
 		right = append(right, utils.Must(strconv.Atoi(ids[1])))
-		l++
 	}
 
+	l := len(left)
 	left = left[:l:l]
 	right = right[:l:l]
 	sort.Ints(left)
